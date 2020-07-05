@@ -109,7 +109,7 @@ int encrypt_aes_gcm(unsigned char *plaintext, unsigned long long plaintext_len, 
         handleErrors();
 
     /* Set IV length if default 12 bytes (96 bits) is not appropriate */
-    if(1 != EVP_CIPHER_CTX_ctrl(ctx, EVP_CTRL_GCM_SET_IVLEN, 16, NULL))
+    if(1 != EVP_CIPHER_CTX_ctrl(ctx, EVP_CTRL_GCM_SET_IVLEN, 14, NULL))
         handleErrors();
 
     /* Initialise key and IV */
@@ -142,7 +142,7 @@ int encrypt_aes_gcm(unsigned char *plaintext, unsigned long long plaintext_len, 
     ciphertext_len += len;
 
     /* Get the tag */
-    if(1 != EVP_CIPHER_CTX_ctrl(ctx, EVP_CTRL_GCM_GET_TAG, 16, tag))
+    if(1 != EVP_CIPHER_CTX_ctrl(ctx, EVP_CTRL_GCM_GET_TAG, 14, tag))
         handleErrors();
 
     /* Clean up */
@@ -166,7 +166,7 @@ int decrypt_aes_gcm(unsigned char *ciphertext, unsigned long long ciphertext_len
         handleErrors();
 
     /* Set IV length. Not necessary if this is 12 bytes (96 bits) */
-    if(!EVP_CIPHER_CTX_ctrl(ctx, EVP_CTRL_GCM_SET_IVLEN, 16, NULL))
+    if(!EVP_CIPHER_CTX_ctrl(ctx, EVP_CTRL_GCM_SET_IVLEN, 14, NULL))
         handleErrors();
 
     /* Initialise key and IV */
@@ -193,7 +193,7 @@ int decrypt_aes_gcm(unsigned char *ciphertext, unsigned long long ciphertext_len
     }
 
     /* Set expected tag value. Works in OpenSSL 1.0.1d and later */
-    if(!EVP_CIPHER_CTX_ctrl(ctx, EVP_CTRL_GCM_SET_TAG, 16, tag))
+    if(!EVP_CIPHER_CTX_ctrl(ctx, EVP_CTRL_GCM_SET_TAG, 14, tag))
         handleErrors();
 
     /* Finalise the decryption. A positive return value indicates success,
