@@ -49,7 +49,7 @@
 #define KAT_CRYPTO_FAILURE  -4
 
 #define MAX_FILE_NAME				256
-#define MAX_MESSAGE_LENGTH			10000
+#define MAX_MESSAGE_LENGTH			1000
 #define MAX_ASSOCIATED_DATA_LENGTH	32
 
 void init_buffer(unsigned char *buffer, unsigned long long numbytes);
